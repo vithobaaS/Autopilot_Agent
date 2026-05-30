@@ -1,0 +1,18 @@
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://127.0.0.1:9222
+[ERROR shell_windows::limited_access_features] Error generating feature token: NS_ERROR_FAILURE
+JavaScript warning: https://1c5c1ecf7303.0b384439.ap-southeast-1.token.awswaf.com/1c5c1ecf7303/d6a7a58005ec/04c5ab18cd2d/challenge.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://1c5c1ecf7303.0b384439.ap-southeast-1.token.awswaf.com/1c5c1ecf7303/d6a7a58005ec/04c5ab18cd2d/challenge.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+Dynamically enable window occlusion 1
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1128: Error: Connection is not open.
+Dynamically enable window occlusion 0
+WebDriver BiDi listening on ws://127.0.0.1:9222
+[ERROR shell_windows::limited_access_features] Error generating feature token: NS_ERROR_FAILURE
+JavaScript warning: https://1c5c1ecf7303.0b384439.ap-southeast-1.token.awswaf.com/1c5c1ecf7303/d6a7a58005ec/04c5ab18cd2d/challenge.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://1c5c1ecf7303.0b384439.ap-southeast-1.token.awswaf.com/1c5c1ecf7303/d6a7a58005ec/04c5ab18cd2d/challenge.js, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://www.amazon.com/, line 3420: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://m.media-amazon.com/images/I/41vKGRrhieL.js?AUIClients/LatencyInteractiveAsset, line 34: unreachable code after return statement
+JavaScript warning: https://www.amazon.com/s?k=apple+macbook+air&crid=1X5KS2D8561BX&sprefix=apple+macbook+air%2Caps%2C583&ref=nb_sb_noss_1, line 11763: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://m.media-amazon.com/images/I/41vKGRrhieL.js?AUIClients/LatencyInteractiveAsset, line 34: unreachable code after return statement
+Dynamically enable window occlusion 1
+JavaScript error: resource://gre/modules/Sqlite.sys.mjs, line 1128: Error: Connection is not open.
