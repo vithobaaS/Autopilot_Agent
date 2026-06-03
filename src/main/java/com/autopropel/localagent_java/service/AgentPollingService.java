@@ -59,6 +59,7 @@ public class AgentPollingService {
 
     private Long pairingId;
     private javax.swing.JFrame pairingFrame;
+    private com.autopropel.localagent_java.ui.AgentDashboardUI dashboardUI;
 
     @PostConstruct
     public void registerOnStartup() {
@@ -97,8 +98,19 @@ public class AgentPollingService {
             reg.agentToken = agentToken;
 
             try {
-                restTemplate.postForObject(regUrl, reg, Object.class);
+                @SuppressWarnings("unchecked")
+                java.util.Map<String, Object> resp = restTemplate.postForObject(regUrl, reg, java.util.Map.class);
                 logger.info("Agent successfully registered with cloud coordinator!");
+
+                if (resp != null) {
+                    String orgName = (String) resp.getOrDefault("orgName", "Unknown Organization");
+                    String tokenLabel = (String) resp.getOrDefault("tokenLabel", "Unknown Token");
+
+                    if (this.dashboardUI == null) {
+                        this.dashboardUI = new com.autopropel.localagent_java.ui.AgentDashboardUI(cloudUrl, orgName, agentId, tokenLabel);
+                        this.dashboardUI.setVisible(true);
+                    }
+                }
             } catch (org.springframework.web.client.HttpClientErrorException.Unauthorized e) {
                 logger.warn("Agent token is invalid (401). Clearing token and restarting pairing flow.");
                 this.agentToken = null;
@@ -129,8 +141,17 @@ public class AgentPollingService {
             String pollUrl = cloudUrl + "/api/agents/" + agentId + "/jobs/next";
             JobDto job = restTemplate.getForObject(pollUrl, JobDto.class);
 
+            if (this.dashboardUI != null) {
+                this.dashboardUI.updatePollTime();
+                this.dashboardUI.setStatus(true, "Idle - Waiting for jobs...");
+            }
+
             if (job != null && job.payloadJson != null) {
                 logger.info("Received job execution #{} from cloud queue", job.executionId);
+
+                if (this.dashboardUI != null) {
+                    this.dashboardUI.showJobExecution(job.executionId, "Job executing...");
+                }
 
                 // Map clean Cloud payload to legacy RunRequest structure expected by ExecutionService
                 com.fasterxml.jackson.databind.JsonNode rootNode = objectMapper.readTree(job.payloadJson);
@@ -188,9 +209,19 @@ public class AgentPollingService {
                 String resultUrl = cloudUrl + "/api/executions/" + job.executionId + "/results";
                 logger.info("Posting execution results back to: {}", resultUrl);
                 restTemplate.postForLocation(resultUrl, result);
+
+                if (this.dashboardUI != null) {
+                    this.dashboardUI.setStatus(true, "Idle - Waiting for jobs...");
+                }
             }
+        } catch (org.springframework.web.client.HttpClientErrorException.Unauthorized e) {
+            logger.warn("Agent is unauthorized (401). Trying to re-register with cloud...");
+            registerOnStartup();
         } catch (Exception e) {
             logger.debug("No jobs or failed to poll cloud: {}", e.getMessage());
+            if (this.dashboardUI != null) {
+                this.dashboardUI.setStatus(false, "Connection error: " + e.getMessage());
+            }
         }
     }
 
