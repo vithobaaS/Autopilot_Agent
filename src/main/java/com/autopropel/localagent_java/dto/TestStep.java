@@ -15,6 +15,11 @@ public class TestStep {
     public String errorLog;
     public String screenshotBase64;
 
+    // Assertions Engine fields
+    public String stepType = "ACTION";    // ACTION or VERIFY
+    public String expectedValue;          // Expected value for VERIFY steps
+    public String actualValue;            // Captured at runtime, sent back to cloud
+
     // We will mutate these statuses during execution
     public Integer executed_status = 0;
     public Integer result_status = 0;

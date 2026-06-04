@@ -310,5 +310,14 @@ public class ActionRegistrar {
         ActionRegistry.register("WaitUntill", new WaitUntillAction());
         ActionRegistry.register("WaitUntillWithtimer", new WaitUntillWithtimerAction());
         ActionRegistry.register("WaitUntilTextPresent", new WaitUntilTextPresentAction());
+
+        // ─── Assertions Engine (Sprint 1) ───────────────────────────────────────
+        ActionRegistry.register("VerifyText",           new VerifyTextAction());
+        ActionRegistry.register("VerifyURL",            new VerifyUrlAction());
+        ActionRegistry.register("VerifyTitle",          new VerifyTitleAction());
+        ActionRegistry.register("VerifyElementExists",  new VerifyElementExistsAction());
+        ActionRegistry.register("VerifyElementVisible", new VerifyElementVisibleAction());
+        ActionRegistry.register("VerifyElementHidden",  new VerifyElementHiddenAction());
+        ActionRegistry.register("VerifyAttribute",      new VerifyAttributeAction());
     }
 }

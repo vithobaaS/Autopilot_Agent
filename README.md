@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Autopilot Local Agent 🚀
+=======
+# Autopilot Local Agent 
+>>>>>>> 0ca870a3d6f6d45341b4d350ca411e5aaa10d5c4
 
 The **Autopilot Local Agent** is an enterprise-grade, lightweight Java execution engine built with Spring Boot 3.4 and Selenium. It securely polls the AutoPropel Cloud Dashboard for automated test execution instructions and runs them flawlessly on your local machine or dedicated test server.
 
@@ -6,7 +10,11 @@ This repository contains the completely refactored, layered architecture for the
 
 ---
 
+<<<<<<< HEAD
 ## 🌟 Key Features
+=======
+## Key Features
+>>>>>>> 0ca870a3d6f6d45341b4d350ca411e5aaa10d5c4
 
 * **300+ Action Framework:** Supports everything from basic interactions (Click, Type) to highly advanced domains including Shadow DOM, iFrames, API Mocking, Mobile Emulation, Visual Testing, and SQL Databases.
 * **O(1) Command Execution:** The monolithic `if-else` execution block was entirely replaced by an `ActionRegistry` that dynamically routes test steps to specialized `ActionHandler` implementations in micro-seconds.
@@ -14,7 +22,11 @@ This repository contains the completely refactored, layered architecture for the
 * **Smart Polling:** Lightweight API polling keeps your local machine synchronized with cloud-scheduled executions.
 * **Windows Native Installer:** Shipped with a pre-configured WiX Toolset integration to build seamless `.msi` Windows installers (`AutopilotAgent-1.0.0.msi`).
 
+<<<<<<< HEAD
 ## 📁 Project Structure
+=======
+## Project Structure
+>>>>>>> 0ca870a3d6f6d45341b4d350ca411e5aaa10d5c4
 
 ```text
 localagent-java/
@@ -27,6 +39,7 @@ localagent-java/
 │   ├── service/        # Business Logic (ExecutionService, AgentPollingService)
 │   └── ui/             # Native Java Swing UI for Agent Configuration
 └── pom.xml             # Maven Configuration
+<<<<<<< HEAD
 ```
 
 ## 🛠️ Getting Started
@@ -64,3 +77,5 @@ The resulting `.msi` file will be generated in the root of the project.
 3. **Execution:** When a test is received, `ExecutionService` spins up a WebDriver.
 4. **Action Routing:** Each step in the test case is matched via the `ActionRegistry` and routed to its dedicated class (e.g., `ClickAction`, `TouchSwipeLeftAction`) for execution.
 5. **Reporting:** Results, logs, and screenshots are securely zipped and posted back to the AutoPropel Cloud Dashboard.
+=======
+>>>>>>> 0ca870a3d6f6d45341b4d350ca411e5aaa10d5c4

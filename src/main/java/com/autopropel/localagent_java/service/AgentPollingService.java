@@ -182,6 +182,10 @@ public class AgentPollingService {
                                 ts.locatorName = stepNode.path("locatorType").asText("");
                                 ts.objectDetail = stepNode.path("locatorValue").asText("");
                                 ts.data = stepNode.path("testData").asText("");
+                                ts.stepType = stepNode.path("stepType").asText("ACTION");
+                                ts.expectedValue = stepNode.path("expectedValue").asText(null);
+                                // If expectedValue is empty string, normalize to null
+                                if (ts.expectedValue != null && ts.expectedValue.isBlank()) ts.expectedValue = null;
                                 
                                 // Fix for Navigate: The cloud UI might store the URL in locatorValue instead of testData
                                 if ("Navigate".equalsIgnoreCase(ts.actionName) && (ts.data == null || ts.data.isBlank())) {
