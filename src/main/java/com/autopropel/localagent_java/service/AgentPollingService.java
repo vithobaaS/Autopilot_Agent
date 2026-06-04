@@ -206,13 +206,26 @@ public class AgentPollingService {
                 RunRequest jobRequest = new RunRequest();
                 jobRequest.result = runResult;
 
-                // Execute job
-                RunRequest result = executionService.execute(jobRequest);
+                try {
+                    // Execute job
+                    RunRequest result = executionService.execute(jobRequest);
 
-                // Post results back
-                String resultUrl = cloudUrl + "/api/executions/" + job.executionId + "/results";
-                logger.info("Posting execution results back to: {}", resultUrl);
-                restTemplate.postForLocation(resultUrl, result);
+                    // Post results back
+                    String resultUrl = cloudUrl + "/api/executions/" + job.executionId + "/results";
+                    logger.info("Posting execution results back to: {}", resultUrl);
+                    restTemplate.postForLocation(resultUrl, result);
+                } catch (Throwable t) {
+                    logger.error("Uncaught error during execution or posting results: ", t);
+                    // Force a fail status back to the cloud
+                    try {
+                        String errorUrl = cloudUrl + "/api/executions/" + job.executionId + "/results";
+                        java.util.Map<String, Object> errorPayload = new java.util.HashMap<>();
+                        errorPayload.put("status", "failed");
+                        restTemplate.postForLocation(errorUrl, errorPayload);
+                    } catch (Exception postEx) {
+                        logger.error("Also failed to post error status to cloud: ", postEx);
+                    }
+                }
 
                 if (this.dashboardUI != null) {
                     this.dashboardUI.setStatus(true, "Idle - Waiting for jobs...");
