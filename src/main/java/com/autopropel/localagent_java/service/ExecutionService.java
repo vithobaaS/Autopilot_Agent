@@ -235,7 +235,7 @@ public class ExecutionService {
                                     captureScreenshot(driver, step);
                                 }
                             }
-                        } catch (Exception e) {
+                        } catch (Throwable e) {
                             logger.error("Step execution failed: {} ({})", step.step_result_id, step.actionName, e);
                             step.result_status = 0;
                             step.errorLog = e.getMessage();
