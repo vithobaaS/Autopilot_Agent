@@ -412,10 +412,16 @@ public class ExecutionService {
         }
         String resolved = input;
         for (Map.Entry<String, String> entry : variables.entrySet()) {
-            String placeholder = "{{" + entry.getKey() + "}}";
-            if (resolved.contains(placeholder)) {
-                String val = entry.getValue() != null ? entry.getValue() : "";
-                resolved = resolved.replace(placeholder, val);
+            String val = entry.getValue() != null ? entry.getValue() : "";
+            
+            String placeholder1 = "{{" + entry.getKey() + "}}";
+            if (resolved.contains(placeholder1)) {
+                resolved = resolved.replace(placeholder1, val);
+            }
+            
+            String placeholder2 = "${" + entry.getKey() + "}";
+            if (resolved.contains(placeholder2)) {
+                resolved = resolved.replace(placeholder2, val);
             }
         }
         return resolved;

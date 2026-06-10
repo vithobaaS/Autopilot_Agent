@@ -213,7 +213,13 @@ public class AgentPollingService {
                     // Post results back
                     String resultUrl = cloudUrl + "/api/executions/" + job.executionId + "/results";
                     logger.info("Posting execution results back to: {}", resultUrl);
-                    restTemplate.postForLocation(resultUrl, result);
+                    
+                    java.util.Map<String, Object> finalPayload = new java.util.HashMap<>();
+                    finalPayload.put("result", result.result);
+                    if (job.jobId != null) {
+                        finalPayload.put("jobId", job.jobId);
+                    }
+                    restTemplate.postForLocation(resultUrl, finalPayload);
                 } catch (Throwable t) {
                     logger.error("Uncaught error during execution or posting results: ", t);
                     // Force a fail status back to the cloud
@@ -221,6 +227,9 @@ public class AgentPollingService {
                         String errorUrl = cloudUrl + "/api/executions/" + job.executionId + "/results";
                         java.util.Map<String, Object> errorPayload = new java.util.HashMap<>();
                         errorPayload.put("status", "failed");
+                        if (job.jobId != null) {
+                            errorPayload.put("jobId", job.jobId);
+                        }
                         restTemplate.postForLocation(errorUrl, errorPayload);
                     } catch (Exception postEx) {
                         logger.error("Also failed to post error status to cloud: ", postEx);

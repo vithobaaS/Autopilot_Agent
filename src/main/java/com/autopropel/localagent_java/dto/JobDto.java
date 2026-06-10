@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JobDto {
     public Long id;
+    public Long jobId;
     public Long executionId;
     public String agentId;
     public String status;
